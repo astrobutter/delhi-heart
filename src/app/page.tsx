@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/Navbar"
 import MenuSection from "@/components/MenuSection"
+import Head from "next/head"
 import { Banner } from "@/components/Banner"
 import { client } from "@/sanity/lib/client"
 import { Contact } from "@/components/Contact"
@@ -17,6 +18,7 @@ export default async function Home() {
   const menuCategories = await client.fetch(menuCategoriesQuery)
 
   return (
+    <>
     <div>
       <Navbar />
       <Banner images={bannerImages} />
@@ -25,5 +27,6 @@ export default async function Home() {
       <Contact />
       <Footer />
     </div>
+    </>
   )
 }
