@@ -71,7 +71,7 @@ export const Footer = () => (
 
     {/* Bottom Bar */}
     <div className="text-center text-xs text-gray-500 mt-8 border-t pt-4">
-      © {new Date().getFullYear()} Delhi Heart. All rights reserved.
+      © {new Date().getFullYear()} Delhi Heart. All rights reserved. 
     </div>
   </footer>
 )
