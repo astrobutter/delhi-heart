@@ -1,1 +1,1 @@
-export const menuCategoriesQuery = `array::unique(*[_type == "menuItem"].category)`;
+export const menuCategoriesQuery = `array::unique(*[_type == "menuItem"].categories[])`;

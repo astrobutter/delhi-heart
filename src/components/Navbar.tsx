@@ -1,22 +1,62 @@
 "use client";
-import Link from 'next/link'
+import { useState } from "react";
+import Link from "next/link";
+import { Menu, X } from "lucide-react"; 
 
 export const Navbar = () => {
-  return (
-    <header className="w-full py-4 px-6 flex items-center justify-between border-b">
-      {/* Logo */}
-      <div className="text-xl font-bold">Delhi Heart</div>
+  const [isOpen, setIsOpen] = useState(false);
 
-      {/* Nav Links */}
-      <nav className="hidden md:flex space-x-6 items-center">
-        <Link href="#menu" className="text-gray-800 hover:text-black">Menu</Link>
-        <Link href="#giftcards" className="text-gray-800 hover:text-black">Gift Cards</Link>
-        <Link href="#contact">
-          <button className="bg-black text-white px-4 py-2 rounded-full">
-            Get In Touch
-          </button>
-        </Link>
-      </nav>
+  return (
+    <header className="w-full border-b">
+      <div className="flex items-center justify-between px-6 py-4">
+        <div className="text-xl font-bold">Delhi Heart</div>
+        <button
+          className="md:hidden text-gray-800"
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label="Toggle menu"
+        >
+          {isOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+        <nav className="hidden md:flex space-x-6 items-center">
+          <Link href="#menu" className="text-gray-800 hover:text-black">
+            Menu
+          </Link>
+          <Link href="#giftcards" className="text-gray-800 hover:text-black">
+            Gift Cards
+          </Link>
+          <Link href="#contact">
+            <button className="bg-black text-white px-4 py-2 rounded-full">
+              Get In Touch
+            </button>
+          </Link>
+        </nav>
+      </div>
+      {isOpen && (
+        <div className="md:hidden px-6 pb-4 flex flex-col justify-center items-center gap-4 bg-white">
+          <Link
+            href="#menu"
+            className="text-gray-800 hover:text-black"
+            onClick={() => setIsOpen(false)}
+          >
+            Menu
+          </Link>
+          <Link
+            href="#offers"
+            className="text-gray-800 hover:text-black"
+            onClick={() => setIsOpen(false)}
+          >
+            Gift Cards
+          </Link>
+          <Link
+            href="#contact"
+            onClick={() => setIsOpen(false)}
+          >
+            <button className="bg-black text-white px-4 py-2 rounded-full w-auto text-center">
+              Get In Touch
+            </button>
+          </Link>
+        </div>
+      )}
     </header>
-  )
-}
+  );
+};

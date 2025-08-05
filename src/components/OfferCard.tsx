@@ -17,7 +17,10 @@ export const OfferCard = ({
   const [flipped, setFlipped] = useState(false);
 
   return (
-    <div className="w-72 h-96 perspective">
+    <div
+      className="w-full max-w-sm h-[380px] sm:h-[420px] perspective cursor-pointer"
+      onClick={() => setFlipped((prev) => !prev)}
+    >
       <div
         className={clsx(
           "relative w-full h-full transition-transform duration-700 transform-style preserve-3d",
@@ -35,33 +38,25 @@ export const OfferCard = ({
             <p className="font-bold text-lg">{headline}</p>
             <p className="text-sm">{subtext}</p>
           </div>
-          <button
-            className="absolute top-3 right-3 bg-black/70 text-white px-3 py-2 rounded-full z-10 hover:bg-black transition flex items-center gap-2 text-sm"
-            onClick={(e) => {
-              e.stopPropagation();
-              setFlipped(true);
-            }}
-          >
-            <RotateCw size={16} />
-            Turn Over For Details
-          </button>
+          <div className="absolute top-3 right-3 bg-black/70 text-white px-3 py-2 rounded-full z-10 text-xs flex items-center gap-1 pointer-events-none">
+            <RotateCw size={14} />
+            Tap Card for Details
+          </div>
         </div>
 
         {/* Back */}
-        <div className="absolute w-full h-full backface-hidden rotate-y-180 bg-white rounded-xl shadow-lg p-4 flex flex-col">
-          <div className="overflow-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100">
+        <div className="absolute w-full h-full backface-hidden rotate-y-180 bg-white rounded-xl shadow-lg p-4 flex flex-col justify-between">
+          <div className="overflow-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-100 pr-1">
             <h3 className="text-lg font-semibold mb-2">{headline}</h3>
-            <div className="list-disc list-inside text-sm text-gray-700 space-y-1">
+            <div className="text-justify text-sm text-gray-700 whitespace-pre-line">
               {details}
             </div>
           </div>
-          <button
-            onClick={() => setFlipped(false)}
-            className="mt-4 bg-black/70 text-white px-3 py-2 rounded-full hover:bg-black transition flex items-center gap-2 self-end text-sm"
-          ><RotateCw size={18} className="transform rotate-180" />
-            Go to Code 
-          </button>
 
+          <div className="mt-4 bg-black/70 text-white px-3 py-2 rounded-full text-xs flex items-center gap-2 self-end pointer-events-none">
+            <RotateCw size={14} className="transform rotate-180" />
+            Tap Again to Flip
+          </div>
         </div>
       </div>
     </div>

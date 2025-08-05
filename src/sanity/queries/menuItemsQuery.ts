@@ -3,6 +3,6 @@ export const menuItemsQuery = `*[_type == "menuItem"]{
   description,
   price,
   rating,
-  category,
+  "categories": categories[],
   "image": image.asset->url
 }`;

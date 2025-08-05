@@ -1,4 +1,3 @@
-// schemas/menuItemType.ts
 import { defineField, defineType } from 'sanity'
 
 export const menuItemType = defineType({
@@ -10,7 +9,12 @@ export const menuItemType = defineType({
     defineField({ name: 'description', title: 'Description', type: 'text' }),
     defineField({ name: 'price', title: 'Price', type: 'number' }),
     defineField({ name: 'rating', title: 'Rating', type: 'number' }),
-    defineField({ name: 'category', title: 'Category', type: 'string' }),
+    defineField({
+      name: 'categories',
+      title: 'Categories',
+      type: 'array',
+      of: [{ type: 'string' }],
+    }),
     defineField({
       name: 'image',
       title: 'Image',
