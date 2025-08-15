@@ -47,7 +47,7 @@ export const OfferSlider = ({ offers }: { offers: any[] }) => {
   })
 
   return (
-    <section className="py-10 px-10 text-center max-w-7xl mx-auto">
+    <section className="py-10 px-10 text-center max-w-7xl mx-auto" id="offers">
       <h2 className="text-2xl font-bold mb-6">Special Offers</h2>
 
       <div

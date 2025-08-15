@@ -35,9 +35,8 @@ export const Footer = () => (
         <h4 className="text-base font-semibold mb-3">Quick Links</h4>
         <ul className="space-y-2">
           <li><a href="#" className="hover:underline">Home</a></li>
-          <li><a href="#" className="hover:underline">Menu</a></li>
-          <li><a href="#" className="hover:underline">About Us</a></li>
-          <li><a href="#" className="hover:underline">Contact</a></li>
+          <li><a href="#menu" className="hover:underline">Menu</a></li>
+          <li><a href="#contact" className="hover:underline">Contact</a></li>
         </ul>
       </div>
 
@@ -46,7 +45,6 @@ export const Footer = () => (
         <h4 className="text-base font-semibold mb-3">Our Values</h4>
         <ul className="space-y-2">
           <li>Fresh Ingredients</li>
-          <li>Fast Delivery</li>
           <li>Customer First</li>
           <li>Eco-Friendly</li>
         </ul>

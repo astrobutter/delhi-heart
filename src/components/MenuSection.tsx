@@ -16,7 +16,7 @@ interface MenuSectionProps {
 }
 
 const MenuSection = ({ menuItems, categories }: MenuSectionProps) => {
-  const defaultCategory = categories.includes('Most Popular') ? 'Most Popular' : categories[0] || ''
+  const defaultCategory = categories.includes('Most Popular') ? 'Most Popular' : categories[0]
   const [activeCategory, setActiveCategory] = useState<string>(defaultCategory)
 
   useEffect(() => {
