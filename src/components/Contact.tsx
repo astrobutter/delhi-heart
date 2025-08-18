@@ -53,12 +53,12 @@ export const Contact = () => (
           <div>
             <p className="text-lg font-semibold text-gray-800">WhatsApp Us</p>
             <a
-              href="https://wa.me/640223466017"
+              href="https://wa.me/640220736839"
               target="_blank"
               rel="noopener noreferrer"
               className="text-green-700 hover:underline font-bold text-xl"
             >
-            022 346 6017
+            0220736839
             </a>
           </div>
           <a
