@@ -62,7 +62,7 @@ export const Contact = () => (
             </a>
           </div>
           <a
-            href="https://wa.me/640223466017"
+            href="https://wa.me/640220736839"
             target="_blank"
             rel="noopener noreferrer"
             className="ml-auto bg-green-600 text-white px-2 py-2 rounded-lg hover:bg-green-700 transition"
