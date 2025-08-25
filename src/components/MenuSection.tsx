@@ -35,6 +35,14 @@ const MenuSection = ({ menuItems: initialMenuItems, categories }: MenuSectionPro
         try {
           const results = await client.fetch(searchMenuItems, { searchQuery })
           setMenuItems(results)
+          
+          // If we have search results, switch to the category of the first result
+          if (results.length > 0 && results[0].categories && results[0].categories.length > 0) {
+            const firstResultCategory = results[0].categories[0]
+            if (categories.includes(firstResultCategory)) {
+              setActiveCategory(firstResultCategory)
+            }
+          }
         } catch (error) {
           console.error('Error searching menu items:', error)
         } finally {
@@ -46,7 +54,7 @@ const MenuSection = ({ menuItems: initialMenuItems, categories }: MenuSectionPro
     }, 300) // Debounce search for better performance
 
     return () => clearTimeout(timer)
-  }, [searchQuery, initialMenuItems])
+  }, [searchQuery, initialMenuItems, categories])
 
   const handleCategoryChange = (category: string) => {
     setActiveCategory(category)
@@ -100,8 +108,17 @@ const MenuSection = ({ menuItems: initialMenuItems, categories }: MenuSectionPro
       </div>
 
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {filteredItems.map((item, i) => (
+      {filteredItems.length === 0 ? (
+        <div className="text-center py-8">
+          <p className="text-lg text-gray-600">
+            {searchQuery 
+              ? `No items found matching "${searchQuery}"`
+              : `No items available in the "${activeCategory}" category`}
+          </p>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          {filteredItems.map((item, i) => (
           <div
             key={i}
             className="bg-white rounded-xl shadow flex items-center justify-between overflow-hidden"
@@ -133,6 +150,7 @@ const MenuSection = ({ menuItems: initialMenuItems, categories }: MenuSectionPro
           </div>
         ))}
       </div>
+      )}
     </section>
   )
 }
