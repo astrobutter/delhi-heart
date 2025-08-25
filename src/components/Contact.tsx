@@ -48,6 +48,16 @@ export const Contact = () => (
             Order Meals
           </a>
         </div>
+
+        {/* Free Delivery Notice */}
+        <div className="p-4 bg-yellow-50 border-2 border-yellow-400 rounded-xl mb-8">
+          <div className="flex items-center justify-between">
+            <div className="flex-1">
+              <h3 className="text-xl font-bold text-yellow-800">🚚 FREE Home Delivery!</h3>
+            </div>
+          </div>
+        </div>
+
         <div className="flex items-center gap-4 mt-8 p-5 border-2 border-green-500 rounded-xl bg-green-50 shadow-lg">
           <FaWhatsapp size={28} className="text-green-600" />
           <div>
