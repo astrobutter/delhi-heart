@@ -18,7 +18,13 @@ interface MenuSectionProps {
 }
 
 const MenuSection = ({ menuItems: initialMenuItems, categories }: MenuSectionProps) => {
-  const defaultCategory = categories.includes('Most Popular') ? 'Most Popular' : categories[0]
+  const prioritySections = ['Most Popular', 'Veg', 'Non-Veg']
+  const orderedCategories = [
+    ...prioritySections,
+    ...categories.filter(category => !prioritySections.includes(category))
+  ]
+  
+  const defaultCategory = orderedCategories.includes('Most Popular') ? 'Most Popular' : orderedCategories[0]
   const [activeCategory, setActiveCategory] = useState<string>(defaultCategory)
   const [searchQuery, setSearchQuery] = useState<string>('')
   const [menuItems, setMenuItems] = useState<MenuItem[]>(initialMenuItems)
@@ -35,11 +41,10 @@ const MenuSection = ({ menuItems: initialMenuItems, categories }: MenuSectionPro
         try {
           const results = await client.fetch(searchMenuItems, { searchQuery })
           setMenuItems(results)
-          
           // If we have search results, switch to the category of the first result
           if (results.length > 0 && results[0].categories && results[0].categories.length > 0) {
             const firstResultCategory = results[0].categories[0]
-            if (categories.includes(firstResultCategory)) {
+            if (orderedCategories.includes(firstResultCategory)) {
               setActiveCategory(firstResultCategory)
             }
           }
@@ -54,7 +59,7 @@ const MenuSection = ({ menuItems: initialMenuItems, categories }: MenuSectionPro
     }, 300) // Debounce search for better performance
 
     return () => clearTimeout(timer)
-  }, [searchQuery, initialMenuItems, categories])
+  }, [searchQuery, initialMenuItems, orderedCategories])
 
   const handleCategoryChange = (category: string) => {
     setActiveCategory(category)
@@ -70,6 +75,14 @@ const MenuSection = ({ menuItems: initialMenuItems, categories }: MenuSectionPro
       Array.isArray(item.categories) &&
       item.categories.includes(activeCategory)
   )
+
+  const getCategoryItemCount = (category: string) => {
+    return menuItems.filter(
+      item =>
+        Array.isArray(item.categories) &&
+        item.categories.includes(category)
+    ).length
+  }
 
   return (
     <section className="py-10 px-4 sm:px-8" id='menu'>
@@ -93,18 +106,21 @@ const MenuSection = ({ menuItems: initialMenuItems, categories }: MenuSectionPro
       </div>
 
       <div className="flex overflow-x-auto whitespace-nowrap gap-2 mb-8 px-2 py-3">
-        {categories.map((category, i) => (
-          <button
-            key={i}
-            className={`px-4 py-1 rounded-full border shrink-0 transition ${activeCategory === category
-                ? 'bg-black text-white'
-                : 'bg-white text-black border-gray-300'
-              }`}
-            onClick={() => handleCategoryChange(category)}
-          >
-            {category}
-          </button>
-        ))}
+        {orderedCategories.map((category, i) => {
+          const itemCount = getCategoryItemCount(category)
+          return (
+            <button
+              key={i}
+              className={`px-4 py-1 rounded-full border shrink-0 transition ${activeCategory === category
+                  ? 'bg-black text-white'
+                  : 'bg-white text-black border-gray-300'
+                } ${itemCount === 0 ? 'opacity-50' : ''}`}
+              onClick={() => handleCategoryChange(category)}
+            >
+              {category} {itemCount > 0 && `(${itemCount})`}
+            </button>
+          )
+        })}
       </div>
 
 
@@ -113,8 +129,13 @@ const MenuSection = ({ menuItems: initialMenuItems, categories }: MenuSectionPro
           <p className="text-lg text-gray-600">
             {searchQuery 
               ? `No items found matching "${searchQuery}"`
-              : `No items available in the "${activeCategory}" category`}
+              : `No items available in the "${activeCategory}" category yet`}
           </p>
+          {!searchQuery && (
+            <p className="text-sm text-gray-400 mt-2">
+              Check back soon for more delicious options!
+            </p>
+          )}
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
