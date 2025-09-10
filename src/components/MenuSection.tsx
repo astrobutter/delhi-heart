@@ -1,6 +1,5 @@
 'use client'
-
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo } from 'react'
 import { client } from '@/sanity/lib/client'
 import { searchMenuItems } from '@/sanity/queries/searchQuery'
 
@@ -19,10 +18,10 @@ interface MenuSectionProps {
 
 const MenuSection = ({ menuItems: initialMenuItems, categories }: MenuSectionProps) => {
   const prioritySections = ['Most Popular', 'Veg', 'Non-Veg']
-  const orderedCategories = [
+  const orderedCategories = useMemo(() => [
     ...prioritySections,
     ...categories.filter(category => !prioritySections.includes(category))
-  ]
+  ], [categories])
   
   const defaultCategory = orderedCategories.includes('Most Popular') ? 'Most Popular' : orderedCategories[0]
   const [activeCategory, setActiveCategory] = useState<string>(defaultCategory)
@@ -36,34 +35,31 @@ const MenuSection = ({ menuItems: initialMenuItems, categories }: MenuSectionPro
 
   useEffect(() => {
     const timer = setTimeout(async () => {
-      if (searchQuery) {
+      if (searchQuery.trim()) {
         setIsSearching(true)
         try {
           const results = await client.fetch(searchMenuItems, { searchQuery })
           setMenuItems(results)
-          // If we have search results, switch to the category of the first result
-          if (results.length > 0 && results[0].categories && results[0].categories.length > 0) {
-            const firstResultCategory = results[0].categories[0]
-            if (orderedCategories.includes(firstResultCategory)) {
-              setActiveCategory(firstResultCategory)
-            }
-          }
+          // Don't automatically switch categories - let user manually switch
         } catch (error) {
           console.error('Error searching menu items:', error)
+          setMenuItems(initialMenuItems) // Fallback to original data on error
         } finally {
           setIsSearching(false)
         }
       } else {
+        // Clear search - restore all original data
         setMenuItems(initialMenuItems)
+        setIsSearching(false)
       }
     }, 300) // Debounce search for better performance
 
     return () => clearTimeout(timer)
-  }, [searchQuery, initialMenuItems, orderedCategories])
+  }, [searchQuery, initialMenuItems])
 
   const handleCategoryChange = (category: string) => {
     setActiveCategory(category)
-    setSearchQuery('') // Clear search when changing category
+    // Don't clear search when changing category
   }
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {

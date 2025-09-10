@@ -19,7 +19,7 @@ export const Banner = ({ images }: { images: { image: string }[] }) => {
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [imageUrls.length]);
+  }, [imageUrls.length, currentIndex]); // Reset timer when currentIndex changes
 
   const goPrev = () => {
     setFade(false);
@@ -42,7 +42,7 @@ export const Banner = ({ images }: { images: { image: string }[] }) => {
   }
 
   return (
-    <section className="relative w-auto h-[30vh]  lg:h-screen overflow-hidden">
+    <section className="relative w-auto h-96 overflow-hidden">
       <div className="relative w-full h-full">
         <img
           key={currentIndex}
