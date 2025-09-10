@@ -2,7 +2,6 @@
 import { useState, useEffect, useMemo } from 'react'
 import { client } from '@/sanity/lib/client'
 import { searchMenuItems } from '@/sanity/queries/searchQuery'
-
 interface MenuItem {
   name: string
   description: string
@@ -10,12 +9,10 @@ interface MenuItem {
   categories?: string[]
   image: string
 }
-
 interface MenuSectionProps {
   menuItems: MenuItem[]
   categories: string[]
 }
-
 const MenuSection = ({ menuItems: initialMenuItems, categories }: MenuSectionProps) => {
   const prioritySections = ['Most Popular', 'Veg', 'Non-Veg']
   const orderedCategories = useMemo(() => [

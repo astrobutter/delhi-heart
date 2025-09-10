@@ -42,7 +42,7 @@ export const Banner = ({ images }: { images: { image: string }[] }) => {
   }
 
   return (
-    <section className="relative w-auto h-96 overflow-hidden">
+    <section className="relative w-auto h-[25vh] overflow-hidden">
       <div className="relative w-full h-full">
         <img
           key={currentIndex}
