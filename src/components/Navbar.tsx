@@ -9,7 +9,13 @@ export const Navbar = () => {
   return (
     <header className="w-full border-b">
       <div className="flex items-center justify-between px-6 py-4">
-        <div className="text-xl font-bold">Delhi Heart</div>
+        <Link href="/" className="flex items-center">
+          <img 
+            src="/logo.webp" 
+            alt="Delhi Heart Logo" 
+            className="h-10 w-auto sm:h-10 md:h-12 object-contain hover:opacity-80 transition-opacity"
+          />
+        </Link>
         <button
           className="md:hidden text-gray-800"
           onClick={() => setIsOpen(!isOpen)}
@@ -21,7 +27,7 @@ export const Navbar = () => {
           <Link href="#menu" className="text-gray-800 hover:text-black">
             Menu
           </Link>
-          <Link href="#giftcards" className="text-gray-800 hover:text-black">
+          <Link href="#offers" className="text-gray-800 hover:text-black">
             Gift Cards
           </Link>
           <Link href="#contact">

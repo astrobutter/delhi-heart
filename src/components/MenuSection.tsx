@@ -37,7 +37,6 @@ const MenuSection = ({ menuItems: initialMenuItems, categories }: MenuSectionPro
         try {
           const results = await client.fetch(searchMenuItems, { searchQuery })
           setMenuItems(results)
-          // Don't automatically switch categories - let user manually switch
         } catch (error) {
           console.error('Error searching menu items:', error)
           setMenuItems(initialMenuItems) // Fallback to original data on error
@@ -45,14 +44,14 @@ const MenuSection = ({ menuItems: initialMenuItems, categories }: MenuSectionPro
           setIsSearching(false)
         }
       } else {
-        // Clear search - restore all original data
         setMenuItems(initialMenuItems)
         setIsSearching(false)
       }
-    }, 300) // Debounce search for better performance
+    }, 300)
 
     return () => clearTimeout(timer)
   }, [searchQuery, initialMenuItems])
+
 
   const handleCategoryChange = (category: string) => {
     setActiveCategory(category)
@@ -63,11 +62,13 @@ const MenuSection = ({ menuItems: initialMenuItems, categories }: MenuSectionPro
     setSearchQuery(e.target.value)
   }
 
-  const filteredItems = menuItems.filter(
-    item =>
-      Array.isArray(item.categories) &&
-      item.categories.includes(activeCategory)
-  )
+  const filteredItems = searchQuery.trim() 
+    ? menuItems 
+    : menuItems.filter(
+        item =>
+          Array.isArray(item.categories) &&
+          item.categories.includes(activeCategory)
+      )
 
   const getCategoryItemCount = (category: string) => {
     return menuItems.filter(
@@ -76,6 +77,7 @@ const MenuSection = ({ menuItems: initialMenuItems, categories }: MenuSectionPro
         item.categories.includes(category)
     ).length
   }
+
 
   return (
     <section className="py-10 px-4 sm:px-8" id='menu'>
@@ -98,23 +100,25 @@ const MenuSection = ({ menuItems: initialMenuItems, categories }: MenuSectionPro
         </div>
       </div>
 
-      <div className="flex overflow-x-auto whitespace-nowrap gap-2 mb-8 px-2 py-3">
-        {orderedCategories.map((category, i) => {
-          const itemCount = getCategoryItemCount(category)
-          return (
-            <button
-              key={i}
-              className={`px-4 py-1 rounded-full border shrink-0 transition ${activeCategory === category
-                  ? 'bg-black text-white'
-                  : 'bg-white text-black border-gray-300'
-                } ${itemCount === 0 ? 'opacity-50' : ''}`}
-              onClick={() => handleCategoryChange(category)}
-            >
-              {category} {itemCount > 0 && `(${itemCount})`}
-            </button>
-          )
-        })}
-      </div>
+      {!searchQuery.trim() && (
+        <div className="flex overflow-x-auto whitespace-nowrap gap-2 mb-8 px-2 py-3">
+          {orderedCategories.map((category, i) => {
+            const itemCount = getCategoryItemCount(category)
+            return (
+              <button
+                key={i}
+                className={`px-4 py-1 rounded-full border shrink-0 transition ${activeCategory === category
+                    ? 'bg-black text-white'
+                    : 'bg-white text-black border-gray-300'
+                  } ${itemCount === 0 ? 'opacity-50' : ''}`}
+                onClick={() => handleCategoryChange(category)}
+              >
+                {category} {itemCount > 0 && `(${itemCount})`}
+              </button>
+            )
+          })}
+        </div>
+      )}
 
 
       {filteredItems.length === 0 ? (
