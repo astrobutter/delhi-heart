@@ -150,7 +150,7 @@ const MenuSection = ({ menuItems: initialMenuItems, categories }: MenuSectionPro
                   {item.categories.map((cat, j) => (
                     <span
                       key={j}
-                      className="text-[0.75rem] bg-gray-200 text-gray-700 px-2 py-1 rounded-full"
+                      className="text-[0.5rem] bg-gray-200 text-gray-700 px-2 py-1 rounded-full"
                     >
                       {cat}
                     </span>
