@@ -11,7 +11,7 @@ export const Contact = () => (
        <div className="flex items-center gap-4 mt-8 p-5 border-2 border-green-50 rounded-xl bg-green-50 shadow-xl">
           <FaWhatsapp size={28} className="text-green-600" />
           <div>
-            <p className="text-lg font-semibold text-gray-800">WhatsApp Us</p>
+            <p className="text-lg font-semibold text-gray-800">Skip third-party apps &#8208; order direct via WhatsApp</p>
             <a
               href="https://wa.me/640220736839"
               target="_blank"
@@ -25,7 +25,7 @@ export const Contact = () => (
             href="https://wa.me/640220736839"
             target="_blank"
             rel="noopener noreferrer"
-            className="ml-auto bg-green-600 text-white px-2 py-2 rounded-lg hover:bg-green-700 transition"
+            className="ml-auto bg-green-600 h-auto text-white py-2 px-4 whitespace-nowrap rounded-lg hover:bg-green-700 transition"
           >
             Order Now
           </a>
@@ -48,7 +48,7 @@ export const Contact = () => (
               ✅
             </span>
             <p className="text-gray-700 ">
-              Free delivery on orders <span className="font-semibold">$60+</span> within <span className="font-semibold">5–6 km</span>.
+              Free delivery on orders <span className="font-bold">$60+</span> within <span className="font-bold">5–6 km</span>.
             </p>
           </div>
           <div className="flex items-center gap-3">
@@ -56,14 +56,14 @@ export const Contact = () => (
               💲
             </span>
             <p className="text-gray-700">
-              Small delivery fee for orders below $60 (<span className="font-medium">$5–$7</span>).
+              Small delivery fee for orders below $60 (<span className="font-bold">$5–$7</span>).
             </p>
           </div>
           <div className="flex items-center gap-3">
             <span className="mt-1.5 inline-flex h-10 w-12 md:w-10 items-center justify-center rounded-full bg-indigo-100">
               🅿️
             </span>
-            <p className="text-gray-700">Free parking available at the rear of our location.</p>
+            <p className="text-gray-700">Parking available at the rear of our location.</p>
           </div>
         </div>
       </div>
