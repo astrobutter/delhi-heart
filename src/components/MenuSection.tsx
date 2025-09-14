@@ -141,16 +141,16 @@ const MenuSection = ({ menuItems: initialMenuItems, categories }: MenuSectionPro
             key={i}
             className="bg-white rounded-xl shadow flex items-center justify-between overflow-hidden"
           >
-            <div className="flex-1 p-4">
-              <h3 className="text-lg font-semibold">{item.name}</h3>
-              <p className="text-sm text-gray-500 mt-1 line-clamp-3">{item.description}</p>
-              <p className="text-lg font-bold mt-2">${item.price.toFixed(2)}</p>
+            <div className="flex-1 py-2 px-4">
+              <h3 className="text-[1rem] font-semibold">{item.name}</h3>
+              <p className="text-[0.75rem] text-gray-500 mt-1 line-clamp-3">{item.description}</p>
+              <p className="text-[1rem] font-bold mt-2">${item.price.toFixed(2)}</p>
               {item.categories && (
                 <div className="mt-2 flex flex-wrap gap-1">
                   {item.categories.map((cat, j) => (
                     <span
                       key={j}
-                      className="text-xs bg-gray-200 text-gray-700 px-2 py-1 rounded-full"
+                      className="text-[0.75rem] bg-gray-200 text-gray-700 px-2 py-1 rounded-full"
                     >
                       {cat}
                     </span>
@@ -158,7 +158,7 @@ const MenuSection = ({ menuItems: initialMenuItems, categories }: MenuSectionPro
                 </div>
               )}
             </div>
-            <div className="relative w-32 h-42 shrink-0">
+            <div className="relative aspect-1/1 w-32 h-full shrink-0">
               <img
                 src={item.image}
                 alt={item.name}
