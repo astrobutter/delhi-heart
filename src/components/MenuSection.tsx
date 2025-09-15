@@ -14,7 +14,26 @@ interface MenuSectionProps {
   categories: string[]
 }
 const MenuSection = ({ menuItems: initialMenuItems, categories }: MenuSectionProps) => {
-  const prioritySections = ['Most Popular', 'Veg', 'Non-Veg']
+  const prioritySections = [
+    'Most Popular',
+    'Veg',
+    'Non-Veg', 
+    'SIZZLER AND ENTRÉE',
+    'INDO CHINESE',
+    'CHAAT & SNACKS',
+    'SIDES',
+    'DRINKS',
+    'KIDS ONLY MENU',
+    'MOMOS',
+    'VEGETARIAN CURRIES',
+    'Breads',
+    'INDIAN THALI\'S',
+    'BIRYANI, RICE & MORE',
+    'CHICKEN CURRIES',
+    'GOAT CURRIES',
+    'Lamb Curries',
+    'SEA FOOD'
+  ]
   const orderedCategories = useMemo(() => [
     ...prioritySections,
     ...categories.filter(category => !prioritySections.includes(category))
