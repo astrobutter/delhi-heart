@@ -7,7 +7,7 @@ export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="w-full border-b bg-black">
+    <header className="w-full border-b ">
       <div className="flex items-center justify-between px-6 py-4">
         <Link href="/" className="flex items-center">
           <img 
