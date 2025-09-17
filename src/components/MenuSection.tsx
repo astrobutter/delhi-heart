@@ -132,7 +132,8 @@ const MenuSection = ({ menuItems: initialMenuItems, categories }: MenuSectionPro
                   } ${itemCount === 0 ? 'opacity-50' : ''}`}
                 onClick={() => handleCategoryChange(category)}
               >
-                {category} {itemCount > 0 && `(${itemCount})`}
+                {category}
+                {/* {itemCount > 0 && `(${itemCount})`} */}
               </button>
             )
           })}
