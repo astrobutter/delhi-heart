@@ -18,15 +18,15 @@ export const Footer = () => (
         <h4 className="text-base font-semibold mb-3">Contact</h4>
         <div className="flex items-center gap-2 mb-2">
           <Mail size={16} />
-          <span>support@example.com</span>
+          <span>surendrasinghnz1970@gmail.com</span>
         </div>
         <div className="flex items-center gap-2 mb-2">
           <Phone size={16} />
-          <span>(555) 123-4567</span>
+          <span>0220736839</span>
         </div>
         <div className="flex items-center gap-2">
           <MapPin size={16} />
-          <span>123 Main Street, New Delhi</span>
+          <span>371 Great North Road, Henderson, Auckland 0612, NZ</span>
         </div>
       </div>
 
@@ -57,7 +57,7 @@ export const Footer = () => (
           <a href="#" className="text-gray-600 hover:text-black">
             <Instagram size={20} />
           </a>
-          <a href="#" className="text-gray-600 hover:text-black">
+          <a href="https://www.facebook.com/delhiheartindiancuisine/" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-black">
             <Facebook size={20} />
           </a>
           <a href="#" className="text-gray-600 hover:text-black">
